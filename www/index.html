@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+    <!--
+  * Please see the included README.md file for license terms and conditions.
+  -->
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="galleria/galleria.classic.css">
+        <link rel="stylesheet" type="text/css" href="flatly/css/flatly.min.css" class="uib-framework-theme">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" class="uib-framework-theme">
+        <link rel="stylesheet" type="text/css" href="flatly/css/flatly.min.css" class="uib-framework-theme">
+        <link rel="stylesheet" type="text/css" href="css/flaticon/font/flaticon.css">
+        <meta charset="UTF-8">
+        <title>iAmSafe</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+        <!--
+  * The "meta viewport" tag (below) helps your app size appropriately to a device's ideal viewport.
+  * Note that Windows device viewports work better when initialized using the @viewport CSS rule.
+  * For a quick overview of "meta viewport" and @viewport, see this article:
+  *   http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag
+  * To see how it works, try your app on a real device with and without a "meta viewport" tag.
+  * Additional useful references include:
+  *   http://www.quirksmode.org/mobile/viewports.html
+  *   http://www.quirksmode.org/mobile/metaviewport/devices.html
+  *   https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
+-->
+
+        <!-- <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1"> -->
+        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=2"> -->
+
+        <style>
+            /* following three (cascaded) are equivalent to above three meta viewport statements */
+            /* see http://www.quirksmode.org/blog/archives/2014/05/html5_dev_conf.html */
+            /* see http://dev.w3.org/csswg/css-device-adapt/ */
+                @-ms-viewport { width: 100vw ; min-zoom: 100% ; zoom: 100% ; }          @viewport { width: 100vw ; min-zoom: 100% zoom: 100% ; }
+                @-ms-viewport { user-zoom: fixed ; min-zoom: 100% ; }                   @viewport { user-zoom: fixed ; min-zoom: 100% ; }
+                /*@-ms-viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }   @viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }*/
+        </style>
+
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less">
+
+        <style>
+            /*#gmaps label { width: auto; display:inline; }
+            #gmaps img { max-width: none; }*/
+        </style>
+
+        <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+        <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work below -->
+        <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+
+        <!-- Recommended location for your JavaScript libraries -->
+        <!-- These library references (below) are just examples to give you the general idea... -->
+        <!-- <script src="lib/mc/hammer.js"></script> -->
+        <!-- <script src="lib/ft/fastclick.js"></script> -->
+
+        <!--
+  * cordova.js is a phantom lib for "Cordova HTML5 web app," it does nothing in a "Standard HTML5 web app"
+  * Seeing a "Failed to load resource: net::ERR_FILE_NOT_FOUND" message caused by this "cordova.js" script?
+  * The cordova.js script is required if you convert your "Standard HTML5" project into a "Cordova" project.
+  * You can safely ignore the error or comment out this line if you will not be developing a Cordova app.
+-->
+        <script type="application/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script type="application/javascript" src="lib/jquery.min.js"></script>
+        <script type="application/javascript" src="bower_components/touche/dist/touche.min.js"></script>
+        <script type="application/javascript" src="bower_components/gmaps/gmaps.min.js"></script>
+
+        <script src="cordova.js" id="xdkJScordova_"></script>
+
+        <script src="js/app.js"></script>
+        <!-- for your event code, see README and file comments for details -->
+        <script src="js/init-app.js"></script>
+        <!-- for your init code, see README and file comments for details -->
+        <script src="xdk/init-dev.js"></script>
+        <!-- normalizes device and document ready events, see file for details -->
+
+        <script type="application/javascript" src="marginal/marginal-position.min.js"></script>
+        <script type="application/javascript" src="xdk/ad/bs_subpage.js"></script>
+        <script type="application/javascript" src="js/index_user_scripts.js"></script>
+        <script type="application/javascript" src="sidebar/js/hammer.js"></script>
+        <script type="application/javascript" src="sidebar/js/jquery.hammer.js"></script>
+        <script type="application/javascript" src="sidebar/js/swipe-hammer.js"></script>
+        <script type="application/javascript" src="sidebar/js/sidebar.js"></script>
+        <script type="application/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        <script type="application/javascript" src="galleria/galleria-1.3.6.min.js"></script>
+        <script type="application/javascript" src="galleria/galleria.classic.min.js"></script>
+        <script type="application/javascript" src="galleria/galleria-startup.js"></script>
+    </head>
+
+    <body>
+        <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+        <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work above -->
+        <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+        <div class="upage" id="mainpage">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_1 font-color-darkgray" data-uib="layout/header" data-ver="0">
+                    <h2>iAmSafe</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_23_95">
+                    <div class="widget uib_w_2 scale-image d-margins" data-uib="media/img" data-ver="0">
+                        <figure class="figure-align">
+                            <img src="images/iAmSafe Logo.png">
+
+                            <figcaption data-position="bottom"></figcaption>
+                        </figure>
+                    </div>
+                    <div class="table-thing widget uib_w_3 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="input-username">Username</label>
+                        <input class="wide-control form-control default" type="text" id="input-username">
+                    </div>
+                    <div class="table-thing widget uib_w_4 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="input-password">Password</label>
+                        <input class="wide-control form-control default" type="text" id="input-password">
+                    </div>
+                    <div class="btn-group uib-bs-flex widget uib_w_5 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                        <button class="btn widget uib_w_6 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-signup">Signup</button>
+                        <button class="btn widget uib_w_7 btn-info" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-login">Login</button>
+                    </div>
+                    <button class="btn widget uib_w_8 d-margins btn-primary" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-fbconnect">Login with Facebook</button>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden" id="page-register">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_9 font-color-darkgray" data-uib="layout/header" data-ver="0">
+                    <h2>Register</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button class="btn widget uib_w_17 d-margins btn-sm btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-cancel-register"><i class="glyphicon glyphicon-remove button-icon-left" data-position="left"></i> Cancel</button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right">
+                        <button class="btn widget uib_w_16 d-margins btn-sm btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-register">Done <i class="glyphicon glyphicon-ok button-icon-right" data-position="right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_85_14">
+                    <div class="table-thing widget uib_w_11 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="input-username">Username</label>
+                        <input class="wide-control form-control default" type="text" id="input-username">
+                    </div>
+                    <div class="table-thing widget uib_w_12 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="input-password">Password</label>
+                        <input class="wide-control form-control default" type="password" id="input-password">
+                    </div>
+                    <div class="table-thing widget uib_w_10 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="input-fullname">Full Name</label>
+                        <input class="wide-control form-control default" type="text" placeholder="Juan dela Cruz" id="input-fullname">
+                    </div>
+                    <div class="table-thing widget uib_w_13 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-top-left" for="input-birthdate">Birth Date</label>
+                        <input class="wide-control form-control default" type="date" id="input-birthdate">
+                    </div>
+                    <div class="table-thing widget uib_w_14 d-margins" data-uib="twitter%20bootstrap/select" data-ver="1">
+                        <label class="narrow-control label-top-left">Gender</label>
+                        <select class="wide-control form-control default" id="input-gender">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+                    <div class="table-thing widget uib_w_15 d-margins" data-uib="twitter%20bootstrap/text_area" data-ver="1">
+                        <label class="narrow-control label-top-left">Disabilities</label>
+                        <textarea rows="2" class="wide-control form-control" wrap="soft" id="textarea-disabilities"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden" id="page-map">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_18 font-color-darkgray" data-uib="layout/header" data-ver="0">
+                    <h2>iAmSafe</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button class="btn widget uib_w_19 d-margins btn-lg btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-menu"><i class="glyphicon glyphicon-align-justify button-icon-left" data-position="left"></i> 
+                        </button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right">
+                        <div class="btn-group uib-bs-flex widget uib_w_25 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_26 btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-fakecall"><i class="glyphicon glyphicon-earphone button-icon-top" data-position="top"></i> 
+                            </button>
+                            <button class="btn widget uib_w_27 btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-alarm"><i class="glyphicon glyphicon-volume-up button-icon-top" data-position="top"></i> 
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col" id="page_55_9">
+                    <div style="position:fixed; background-color: gray; width:100vw; height:90vh;">
+                        <div id="map">
+
+                        </div>
+                    </div>
+
+                    <figure class="margin-auto widget uib_w_62 d-margins hide" data-uib="media/audio" data-ver="1">
+                        <audio controls="controls">
+                            <source src="my/audio/src.mp3" type="audio/mpeg">
+                                <source src="my/audio/src.ogg" type="audio/ogg">
+                                    <source src="my/audio/src.wav" type="audio/wav">
+                        </audio>
+                    </figure>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_22" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <button class="btn widget uib_w_23 d-margins btn-danger" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-report"><i class="glyphicon glyphicon-screenshot button-icon-top" data-position="top"></i>REPORT</button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button class="btn widget uib_w_24 d-margins button-width-72 btn-sm btn-success" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-safe"><i class="glyphicon glyphicon-ok button-icon-top" data-position="top"></i>safe</button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right">
+                        <button class="btn widget uib_w_28 d-margins button-width-72 btn-sm btn-warning" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-unsafe"><i class="glyphicon glyphicon-remove button-icon-top" data-position="top"></i>unsafe</button>
+                    </div>
+                </div>
+                <div class="inner-element uib_w_32 uib_sidebar leftbar bar-bg thumb-bg bar-gutter swipe" data-uib="layout/left_sidebar" data-ver="1" data-anim="{'style':'overlap', 'v':200, 'side':'left', 'dur':200}" id="side-bar">
+                    <div class="sidebar-content content-area vertical-col">
+
+                        <button class="btn widget uib_w_33 d-margins btn-lg btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-menu"><i class="glyphicon glyphicon-align-justify button-icon-left" data-position="left"></i>iAmSafe</button>
+                        <div class="btn-group uib-bs-flex widget uib_w_40 d-margins btn-group-vertical" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_41 vertical-group btn-default" data-uib="twitter%20bootstrap/button" data-ver="1">Account<i class="glyphicon glyphicon-user button-icon-right" data-position="right"></i>
+                            </button>
+                            <button class="btn widget uib_w_43 vertical-group btn-default" data-uib="twitter%20bootstrap/button" data-ver="1">Logout<i class="glyphicon glyphicon-off button-icon-right" data-position="right"></i>
+                            </button>
+                        </div>
+                        <button class="btn widget uib_w_34 d-margins btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-settings">Settings <i class="glyphicon glyphicon-cog button-icon-right" data-position="right"></i>
+                        </button>
+                        <div class="btn-group uib-bs-flex widget uib_w_36 d-margins btn-group-vertical" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                            <button class="btn widget uib_w_37 vertical-group btn-default" data-uib="twitter%20bootstrap/button" data-ver="1">Help<i class="glyphicon glyphicon-question-sign button-icon-right" data-position="right"></i>
+                            </button>
+                            <button class="btn widget uib_w_38 vertical-group btn-default" data-uib="twitter%20bootstrap/button" data-ver="1">Feedback<i class="glyphicon glyphicon-envelope button-icon-right" data-position="right"></i>
+                            </button>
+                            <button class="btn widget uib_w_39 vertical-group btn-default" data-uib="twitter%20bootstrap/button" data-ver="1">Rate App<i class="glyphicon glyphicon-star-empty button-icon-right" data-position="right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal outer-element uib_w_44" data-uib="twitter%20bootstrap/modal" data-ver="1" data-backdrop="true" id="popup-report">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">x</button>
+                            <h4 class="modal-title">Report</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="col uib_col_1 single-col" data-uib="layout/col" data-ver="0">
+                                <div class="widget-container content-area vertical-col">
+                                    <div class="btn-group uib-bs-flex widget uib_w_46 d-margins btn-group-vertical" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                                        <button class="btn widget uib_w_47 vertical-group btn-danger" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-danger">i'm on DANGER!</button>
+                                        <button class="btn widget uib_w_48 vertical-group btn-warning" data-uib="twitter%20bootstrap/button" data-ver="1">i am Cautious</button>
+                                        <button class="btn widget uib_w_49 vertical-group btn-success" data-uib="twitter%20bootstrap/button" data-ver="1">i am Safe!</button>
+                                    </div>
+                                    <div class="btn-group uib-bs-flex widget uib_w_50 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                                        <button class="btn widget uib_w_51 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-landslide"><i class="glyphicon glyphicon-music button-icon-top flaticon-avalanche" data-position="top"></i> 
+                                        </button>
+                                        <button class="btn widget uib_w_94 d-margins btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-outrage"><i class="glyphicon glyphicon-envelope button-icon-top flaticon-not-flash-allowed" data-position="top"></i> 
+                                        </button>
+                                        <button class="btn widget uib_w_52 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-drowning"><i class="glyphicon glyphicon-plus-sign button-icon-top flaticon-han-in-water" data-position="top"></i> 
+                                        </button>
+                                        <button class="btn widget uib_w_53 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-chemical"><i class="glyphicon glyphicon-envelope button-icon-top flaticon-poison-bottle" data-position="top"></i> 
+                                        </button>
+                                    </div>
+                                    <div class="btn-group uib-bs-flex widget uib_w_54 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                                        <button class="btn widget uib_w_55 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-flood"><i class="glyphicon glyphicon-plus button-icon-top flaticon-flood-symbol flaticon-flood-symbol" data-position="top"></i> 
+                                        </button>
+                                        <button class="btn widget uib_w_56 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-robbery"><i class="glyphicon glyphicon-ok button-icon-top flaticon-thief" data-position="top"></i> 
+                                        </button>
+                                        <button class="btn widget uib_w_57 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-murder"><i class="glyphicon glyphicon-home button-icon-top flaticon-knife-with-blood" data-position="top"></i> 
+                                        </button>
+                                    </div>
+                                    <div class="btn-group uib-bs-flex widget uib_w_58 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                                        <button class="btn widget uib_w_59 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-medical"><i class="glyphicon glyphicon-search button-icon-top flaticon-first-aid-kit" data-position="top"></i> 
+                                        </button>
+                                        <button class="btn widget uib_w_60 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-accident"><i class="glyphicon glyphicon-star button-icon-top flaticon-side-crash" data-position="top"></i> 
+                                        </button>
+                                        <button class="btn widget uib_w_61 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-fire"><i class="glyphicon glyphicon-user button-icon-top flaticon-fire" data-position="top"></i> 
+                                        </button>
+                                    </div>
+                                    <span class="uib_shim"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal outer-element uib_w_63" data-uib="twitter%20bootstrap/modal" data-ver="1" data-backdrop="static" id="popup-sending">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">x</button>
+                            <h4 class="modal-title">Sending</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="col uib_col_2 single-col" data-uib="layout/col" data-ver="0">
+                                <div class="widget-container content-area vertical-col">
+                                    <div class="progress full-width-widget widget uib_w_64 d-margins active progress-striped" data-uib="twitter%20bootstrap/progress_bar" data-ver="1">
+                                        <div class="progress-bar progress-bar-success" style="width: 100%;"></div>
+                                    </div>
+                                    <span class="uib_shim"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal outer-element uib_w_78" data-uib="twitter%20bootstrap/modal" data-ver="1" data-backdrop="true" id="popup-safepin">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">x</button>
+                            <h4 class="modal-title">Safe Pin</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="col uib_col_8 single-col" data-uib="layout/col" data-ver="0">
+                                <div class="widget-container content-area vertical-col">
+                                    <button class="btn widget uib_w_79 d-margins btn-success" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-safe-image"><i class="glyphicon glyphicon-camera button-icon-left" data-position="left"></i>Capture Photo</button>
+                                    <div class="widget uib_w_85 scale-image d-margins" data-uib="media/img" data-ver="0">
+                                        <figure class="figure-align">
+                                            <img id="img-safe">
+
+                                            <figcaption data-position="bottom"></figcaption>
+                                        </figure>
+                                    </div>
+
+                                    <div class="table-thing widget uib_w_83 d-margins" data-uib="twitter%20bootstrap/text_area" data-ver="1">
+                                        <label class="narrow-control label-top-left">Description</label>
+                                        <textarea rows="2" class="wide-control form-control" wrap="soft" id="textarea-safe-description"></textarea>
+                                    </div>
+                                    <div class="table-thing widget uib_w_81 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                        <label class="narrow-control label-top-left" for="input-safe-address">Address</label>
+                                        <input class="wide-control form-control default" type="text" id="input-safe-address">
+                                    </div>
+                                    <div class="table-thing widget uib_w_82 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                        <label class="narrow-control label-inline" for="input-safe-geolocation">geolocation</label>
+                                        <input class="wide-control form-control default input-sm" type="text" id="input-safe-geolocation">
+                                    </div>
+                                    <button class="btn widget uib_w_84 d-margins btn-primary" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-safe-post">POST</button>
+                                    <span class="uib_shim"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal outer-element uib_w_86" data-uib="twitter%20bootstrap/modal" data-ver="1" data-backdrop="true" id="popup-unsafepin">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">x</button>
+                            <h4 class="modal-title">Unsafe Pin</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="col uib_col_9 single-col" data-uib="layout/col" data-ver="0">
+                                <div class="widget-container content-area vertical-col">
+                                    <button class="btn widget uib_w_89 d-margins btn-warning" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-unsafe-image"><i class="glyphicon glyphicon-camera button-icon-left" data-position="left"></i>Capture Photo</button>
+                                    <div class="widget uib_w_87 scale-image d-margins" data-uib="media/img" data-ver="0">
+                                        <figure class="figure-align">
+                                            <img id="img-unsafe">
+                                            <figcaption data-position="bottom"></figcaption>
+                                        </figure>
+                                    </div>
+                                    <div class="table-thing widget uib_w_88 d-margins" data-uib="twitter%20bootstrap/select" data-ver="1">
+                                        <label class="narrow-control label-top-left">Category</label>
+                                        <select class="wide-control form-control default" id="input-unsafe-category">
+                                            <option>Cat calling / Whistlers</option>
+                                            <option>No lights</option>
+                                            <option>No Police/Cops</option>
+                                            <option>No road signs</option>
+                                            <option>No public transport</option>
+                                            <option>Wild animals</option>
+                                            <option>Potholes</option>
+                                            <option>Crowded area</option>
+                                        </select>
+                                    </div>
+                                    <div class="table-thing widget uib_w_90 d-margins" data-uib="twitter%20bootstrap/text_area" data-ver="1">
+                                        <label class="narrow-control label-top-left">Description</label>
+                                        <textarea rows="2" class="wide-control form-control" wrap="soft" id="textarea-unsafe-description"></textarea>
+                                    </div>
+                                    <div class="table-thing widget uib_w_91 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                        <label class="narrow-control label-top-left" for="input-unsafe-address">Address</label>
+                                        <input class="wide-control form-control default" type="text" placeholder="Address" id="input-unsafe-address">
+                                    </div>
+                                    <div class="table-thing widget uib_w_92 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                        <label class="narrow-control label-inline" for="input-unsafe-geolocation">Geolocation</label>
+                                        <input class="wide-control form-control default input-sm" type="text" id="input-unsafe-geolocation">
+                                    </div>
+                                    <button class="btn widget uib_w_93 d-margins btn-primary" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-unsafe-post">POST</button>
+                                    <span class="uib_shim"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden" id="page-settings">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_29 font-color-darkgray" data-uib="layout/header" data-ver="0">
+                    <h2>Settings</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button class="btn widget uib_w_30 d-margins btn-lg btn-link" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-cog button-icon-left" data-position="left"></i>
+                        </button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right">
+                        <button class="btn widget uib_w_31 d-margins btn-sm btn-link" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-done-settings">Done <i class="glyphicon glyphicon-ok button-icon-right" data-position="right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_73_36">
+                    <div class="panel-group no_wrap widget uib_w_71 d-margins" data-uib="twitter%20bootstrap/accordion" data-ver="1" id="bs-accordion-0">
+                        <div class="panel widget uib_w_72 panel-success" data-uib="twitter%20bootstrap/collapsible" data-ver="1">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+           <a class="accordion-toggle" data-toggle="collapse" href="#bs-accordion-group-0" data-parent="#bs-accordion-0">Emergency Contacts</a>
+       </h4>
+                            </div>
+                            <div id="bs-accordion-group-0" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="col uib_col_5 single-col" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <div class="table-thing widget uib_w_75 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                <label class="narrow-control label-inline">1 )</label>
+                                                <input class="wide-control form-control default" type="text" placeholder="+63 917 638 xxxx">
+                                            </div>
+                                            <div class="table-thing widget uib_w_76 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                <label class="narrow-control label-inline">2 )</label>
+                                                <input class="wide-control form-control default" type="text" placeholder="+63 917 638 xxxx">
+                                            </div>
+                                            <div class="table-thing widget uib_w_77 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                <label class="narrow-control label-inline">3 )</label>
+                                                <input class="wide-control form-control default" type="text" placeholder="+63 917 638 xxxx">
+                                            </div>
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel widget uib_w_73 panel-success" data-uib="twitter%20bootstrap/collapsible" data-ver="1">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+           <a class="accordion-toggle" data-toggle="collapse" href="#bs-accordion-group-1" data-parent="#bs-accordion-0"></a>
+       </h4>
+                            </div>
+                            <div id="bs-accordion-group-1" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="col uib_col_6 single-col" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel widget uib_w_74 panel-success" data-uib="twitter%20bootstrap/collapsible" data-ver="1">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+           <a class="accordion-toggle" data-toggle="collapse" href="#bs-accordion-group-2" data-parent="#bs-accordion-0"></a>
+       </h4>
+                            </div>
+                            <div id="bs-accordion-group-2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="col uib_col_7 single-col" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upage vertical-col left hidden" id="page-fakecall">
+            <div class="grid grid-pad urow uib_row_1 row-height-1" data-uib="layout/row" data-ver="0">
+                <div class="col uib_col_3 col-0_12-12" data-uib="layout/col" data-ver="0">
+                    <div class="widget-container content-area vertical-col">
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <span class="uib_shim"></span>
+            </div>
+            <div class="widget uib_w_65 scale-image d-margins" data-uib="media/img" data-ver="0">
+                <figure class="figure-align">
+                    <img src="images/iAmSafe Logo.png">
+                    <figcaption data-position="bottom"></figcaption>
+                </figure>
+            </div>
+            <div class="tarea widget uib_w_70 d-margins text-center" data-uib="media/text" data-ver="0" name="uib_w_70">
+                <div class="widget-container left-receptacle"></div>
+                <div class="widget-container right-receptacle"></div>
+                <div class="text-container">
+                    <h2><strong>Police Station</strong></h2>
+                </div>
+            </div>
+
+            <div class="btn-group uib-bs-flex widget uib_w_66 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                <button class="btn widget uib_w_67 btn-success" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-accept">Accept</button>
+                <button class="btn widget uib_w_69 btn-danger" data-uib="twitter%20bootstrap/button" data-ver="1" id="btn-decline">Decline</button>
+            </div>
+        </div>
+    </body>
+
+</html>
